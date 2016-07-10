@@ -12,30 +12,25 @@ function copyDir(src, dist, cb) {
         if(err) {
             fs.mkdirSync(dist);
         } else { //文件已经存在是否覆盖？
-            console.log('yes or no');
+            console.log('Files is exited, do you want overWrite ?(yes/no)');
             process.stdin.on('data', function(text) {
-                
                 var text = text.trim().toLowerCase();
-
-                if(text == 'yes' || text == 'y') {
-                    test();
-                } else {
-                    _test();
+                if(text !== 'yes' || text !== 'y') {
+                    process.exit();
                 }
-                process.exit()
-            })
-            // _copy(null, src, dist, cb);
+            });
+            _copy(null, src, dist, cb);
         }
     }); 
 }
 
-function _test() {
-    console.log('------test-------');
-}
+// function _test() {
+//     console.log('------test-------');
+// }
 
-function test() {
-    console.log('--------if-------');
-}
+// function test() {
+//     console.log('--------if-------');
+// }
 function _copy(err, src, dist, cb) {
     if(err) {
         cb(err);
@@ -69,3 +64,9 @@ var distFile = process.argv[2] ? ('./' + process.argv[2]) : './po_fe';
 copyDir(sourceFile, distFile, function(err) {
     console.log(err);
 })
+
+/**
+ * less, scss, styls
+ * jquery zepto
+ * 
+ */
